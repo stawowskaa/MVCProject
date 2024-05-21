@@ -1,0 +1,73 @@
+﻿@model IEnumerable<MyLibrary.MVC.Entities.MyLibraryEntity>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>MyLibrary</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<p>
+    @using (Html.BeginForm("Index", "MyLibrary", FormMethod.Get))
+    {
+        <b>Search by:</b><br />
+        @Html.RadioButton("SearchBy", "Author", true) <text>Author</text><br />
+        @Html.RadioButton("SearchBy", "Title") <text>Title</text>
+
+        <br />
+        @Html.TextBox("search", "", htmlAttributes: new { @class = "w-50 form-control" })
+        <input style="margin-top:5px" type="submit" value="Search" class="btn btn-success" />
+        
+    }
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reader)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfReturn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contact)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reader)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfReturn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contact)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
